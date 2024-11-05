@@ -1,10 +1,47 @@
-import React from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
+import React, { useRef } from "react";
 
 function Page6() {
+  const animatedRef = useRef(null);
+  const linkRef = useRef(null);
+
+  useGSAP(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.from(animatedRef.current, {
+      scrollTrigger: {
+        trigger: animatedRef.current,
+        start: "top 80%",
+        end: "top 30%",
+      },
+      opacity: 0,
+      y: 100,
+      stagger: 0.3,
+      duration: 1.5,
+      ease: "power3.out",
+    });
+
+    gsap.from(linkRef.current, {
+      scrollTrigger: {
+        trigger: animatedRef.current,
+        start: "-70% 50%",
+        end: "-30% 50%",
+      },
+      opacity: 0,
+      y: 50,
+      duration: 1.5,
+      ease: "power3.out",
+    });
+  }, []);
+
   return (
     <div className="h-screen relative bg-[url(/images/lovemarriage.webp)] bg-cover">
       <div className="w-full h-full bg-black opacity-20"></div>
-      <div className="absolute bottom-0 right-0 p-[2vw] text-white flex flex-col gap-[1vw]">
+      <div
+        ref={animatedRef}
+        className="absolute bottom-0 right-0 p-[2vw] text-white flex flex-col gap-[1vw]"
+      >
         <h1 className="text-[3.5vw] leading-[4.5vw] font-[font4]">
           Love Marriage
         </h1>
@@ -19,6 +56,7 @@ function Page6() {
           of pistachio, praline, saffron, rum, marigold, and sandalwood.
         </p>
         <a
+          ref={linkRef}
           className="uppercase text-[.95vw] font-[font3] tracking-[1.5px]"
           href=""
         >
