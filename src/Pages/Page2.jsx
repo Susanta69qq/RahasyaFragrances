@@ -17,9 +17,11 @@ function Page2() {
         scrub: true,
       },
       opacity: 0.2,
-      stagger: 0.1,
+      stagger: 0.3,
+      duration: 0.5,
+      delay: 0.5,
     });
-  });
+  }, []);
   return (
     <div className="h-screen bg-black">
       <div className="h-full text-white font-[font4] flex flex-col gap-[5vw] items-center justify-center ">
