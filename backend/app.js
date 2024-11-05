@@ -1,11 +1,27 @@
 import express from "express";
+import dbConnect from "./dbConfig/db.js";
+import { configDotenv } from "dotenv";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import { admin, adminRouter } from "./admin/admin.js";
+
+configDotenv();
 
 const app = express();
 
+dbConnect();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(cors());
+
+app.use(admin.options.rootPath, adminRouter);
+
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.status(200).json({ message: "Hello from backend" });
 });
 
-app.listen(3000, () => {
-  console.log("Listening on port 3000");
+app.listen(process.env.PORT, () => {
+  console.log(`listening to port ${process.env.PORT}`);
 });
