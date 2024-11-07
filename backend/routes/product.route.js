@@ -1,9 +1,9 @@
 import express from "express";
 import Product from "../models/product.model.js";
 
-const router = express.Router();
+const productRouter = express.Router();
 
-router.get("/collections", async (req, res) => {
+productRouter.get("/collections", async (req, res) => {
   try {
     const products = await Product.find();
     res
@@ -14,4 +14,4 @@ router.get("/collections", async (req, res) => {
   }
 });
 
-export default router;
+export default productRouter;

@@ -5,7 +5,8 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import { admin, adminRouter } from "./admin/admin.js";
 import bodyParser from "body-parser";
-import router from "./routes/product.route.js";
+import userRouter from "./routes/user.route.js";
+import productRouter from "./routes/product.route.js";
 
 configDotenv();
 
@@ -22,7 +23,8 @@ app.use(cors());
 
 app.use(bodyParser.json());
 
-app.get("/collections", router);
+app.get("/collections", productRouter);
+app.post("/signup", userRouter);
 
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Hello from backend" });
