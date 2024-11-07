@@ -22,7 +22,7 @@ const admin = new AdminJS({
 //Admin credentials
 const ADMIN = {
   email: process.env.ADMIN_EMAIL || "jaylo69sick@gmail.com",
-  password: process.env.ADMIN_PASSWORD || "susanta69@",
+  password: process.env.ADMIN_PASSWORD || "susa98756@",
 };
 
 //Build autheticated router
@@ -34,7 +34,8 @@ const adminRouter = AdminJSExpress.buildAuthenticatedRouter(admin, {
     return null;
   },
   cookieName: process.env.ADMIN_COOKIE,
-  cookiePassword: process.env.ADMIN_COOKIE_PASS || "a_secure_cookie_secret",
+  cookiePassword:
+    process.env.ADMIN_COOKIE_PASS || "blah_blah_blah_password_adminCookie",
 });
 
 export { admin, adminRouter };

@@ -25,6 +25,7 @@ app.use(bodyParser.json());
 
 app.get("/collections", productRouter);
 app.post("/signup", userRouter);
+app.post("/login", userRouter);
 
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Hello from backend" });

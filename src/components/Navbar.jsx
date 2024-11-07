@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import LoginPage from "../Pages/LoginPage";
 
 function Navbar() {
   const [openDialog, setOpenDialog] = useState(false);
@@ -25,9 +26,14 @@ function Navbar() {
           rahasya
         </h2>
       </div>
-      <div className="text-white uppercase font-[font3] text-[1vw] flex items-center gap-[2vw] 
-      transition-all duration-200">
-        <a className="dialog w-[15vw] cursor-pointer" onClick={() => toggleDialog()}>
+      <div
+        className="text-white uppercase font-[font3] text-[1vw] flex items-center gap-[2vw] 
+      transition-all duration-200"
+      >
+        <a
+          className="dialog w-[15vw] cursor-pointer"
+          onClick={() => toggleDialog()}
+        >
           {options ? options : "india | inr ₹"}
           <span>
             {openDialog ? (
@@ -38,7 +44,7 @@ function Navbar() {
           </span>
         </a>
         <a href="">search</a>
-        <a href="">log in</a>
+        <a href="/login">log in</a>
         <a href="">cart</a>
 
         {openDialog && (

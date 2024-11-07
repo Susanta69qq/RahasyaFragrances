@@ -1,8 +1,7 @@
 import React from "react";
+import Navbar from "./components/Navbar";
 import Page1 from "./Pages/Page1";
 import Page2 from "./Pages/Page2";
-import Navbar from "./components/Navbar";
-import SmoothScroll from "./components/SmoothScroller";
 import Page3 from "./Pages/Page3";
 import Page4 from "./Pages/Page4";
 import Page5 from "./Pages/Page5";
@@ -13,9 +12,8 @@ import Footer from "./components/Footer";
 function App() {
   return (
     <>
-      <SmoothScroll />
-      <Navbar />
       <div className="home">
+        <Navbar />
         <Page1 />
         <Page2 />
         <Page3 />
