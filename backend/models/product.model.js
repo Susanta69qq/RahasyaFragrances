@@ -7,32 +7,32 @@ const productSchema = new mongoose.Schema({
   },
   gender: {
     type: String,
-    required: true,
     enum: ["male", "female", "unisex"],
   },
   price: {
     type: Number,
     required: true,
   },
+  bottleSize: {
+    type: String,
+  },
+  description: {
+    type: String,
+  },
   inspiration: {
     type: String,
-    required: true,
   },
   scentNotes: {
     type: String,
-    required: true,
   },
   howToWear: {
     type: String,
-    required: true,
   },
   ingredients: {
     type: String,
-    required: true,
   },
   sustainability: {
     type: String,
-    required: true,
   },
   images: {
     type: [String],
@@ -40,7 +40,6 @@ const productSchema = new mongoose.Schema({
   },
   blendInfo: {
     type: [String],
-    required: true,
   },
 });
 
