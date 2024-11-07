@@ -56,3 +56,6 @@ html {
   font-kerning: none;
 }
 
+.movingText2{
+  animation: marquee 5s linear infinite;
+}
