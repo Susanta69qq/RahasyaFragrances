@@ -57,13 +57,12 @@ userRouter.post("/login", async (req, res) => {
 
     return res
       .status(200)
-      .json({ message: "User has successfully logged in!" });
+      .json({ message: "User has successfully logged in!", token: token });
   } catch (error) {
     return res.status(400).json({ message: "Login failed", error });
   }
 });
 
 //logout user
-
 
 export default userRouter;
