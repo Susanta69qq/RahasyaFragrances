@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import LoginPage from "../Pages/LoginPage";
 
-function Navbar() {
+function Navbar({ textColor = "text-white" }) {
   const [openDialog, setOpenDialog] = useState(false);
   const [options, setOptions] = useState("");
 
@@ -15,20 +14,24 @@ function Navbar() {
   };
   return (
     <div className="fixed w-full px-[2.75vw] py-[.5vw] z-[99] flex justify-between items-center">
-      <div className="text-white flex gap-[3.5vw] uppercase font-[font3] text-[1vw]">
-        <a href="">collection</a>
+      <div
+        className={`${textColor} flex gap-[3.5vw] uppercase font-[font3] text-[1vw]`}
+      >
+        <a href={"/collections"}>collection</a>
         <a href="">secret</a>
         <a href="">about</a>
         <a href="">faq</a>
       </div>
       <div>
-        <h2 className="text-white uppercase font-[font4] text-[3vw]">
-          rahasya
-        </h2>
+        <a href={"/"}>
+          <h2 className={`${textColor} uppercase font-[font4] text-[3vw]`}>
+            rahasya
+          </h2>
+        </a>
       </div>
       <div
-        className="text-white uppercase font-[font3] text-[1vw] flex items-center gap-[2vw] 
-      transition-all duration-200"
+        className={`${textColor} uppercase font-[font3] text-[1vw] flex items-center gap-[2vw] 
+      transition-all duration-200`}
       >
         <a
           className="dialog w-[15vw] cursor-pointer"
@@ -48,7 +51,9 @@ function Navbar() {
         <a href="">cart</a>
 
         {openDialog && (
-          <div className="absolute top-[70%] w-[200px] max-h-[150px] bg-gray-800 text-white rounded shadow-lg overflow-y-auto transition-opacity duration-200">
+          <div
+            className={`absolute top-[70%] w-[200px] max-h-[150px] bg-gray-800 ${textColor} rounded shadow-lg overflow-y-auto transition-opacity duration-200`}
+          >
             <ul className="py-2">
               <li
                 onClick={handleOptions}

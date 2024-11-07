@@ -7,6 +7,7 @@ import "remixicon/fonts/remixicon.css";
 import LoginPage from "./Pages/LoginPage.jsx";
 import SmoothScroll from "./components/SmoothScroller";
 import RegisterPage from "./Pages/RegisterPage.jsx";
+import Products from "./Pages/Products.jsx";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <RegisterPage />
+  },
+  {
+    path: "/collections",
+    element: <Products />
   }
 ]);
 

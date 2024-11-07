@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ClockLoader } from "react-spinners";
 
 function RegisterPage() {
   const navigate = useNavigate();
+  const [isLoading, setisLoading] = useState(false);
   const handleRegister = async (e) => {
     e.preventDefault();
+    setisLoading(true);
     try {
       const response = await axios.post(
         "https://rahasyafragrances.onrender.com/signup",
@@ -18,13 +21,14 @@ function RegisterPage() {
           password: e.target.password.value,
         }
       );
-
       navigate("/login");
     } catch (error) {
       console.log(
         "User already registered, please try another email address!",
         error
       );
+    } finally {
+      setisLoading(false);
     }
   };
   return (
@@ -45,6 +49,7 @@ function RegisterPage() {
               type="text"
               name="firstName"
               placeholder="First name"
+              required="true"
             />
             <input
               className="bg-transparent border border-white px-[1.5vw] py-[.65vw]
@@ -52,6 +57,7 @@ function RegisterPage() {
               type="text"
               name="lastName"
               placeholder="Last name"
+              required="true"
             />
             <input
               className="bg-transparent border border-white px-[1.5vw] py-[.65vw] 
@@ -59,6 +65,7 @@ function RegisterPage() {
               type="email"
               name="email"
               placeholder="Email"
+              required="true"
             />
             <input
               className="bg-transparent border border-white px-[1.5vw] py-[.65vw]
@@ -66,13 +73,18 @@ function RegisterPage() {
               type="password"
               name="password"
               placeholder="Password"
+              required="true"
             />
             <div className="flex flex-col justify-center items-center gap-[1vw]">
               <button
                 type="submit"
                 className="bg-white text-black px-[1.2vw] py-[.5vw] rounded-md"
               >
-                Create
+                {isLoading ? (
+                  <ClockLoader color="#000" loading={isLoading} size={20} />
+                ) : (
+                  "Create"
+                )}
               </button>
             </div>
           </form>

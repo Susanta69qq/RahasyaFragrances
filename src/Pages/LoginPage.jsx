@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ClockLoader } from "react-spinners";
 
 function LoginPage() {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   const handleLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const email = e.target.email.value;
     const password = e.target.password.value;
     try {
@@ -18,11 +21,13 @@ function LoginPage() {
           password,
         }
       );
-      
-      console.log("Login successful", response.data.token);
+
+      localStorage.setItem("authToken", response.data.token);
       navigate("/");
     } catch (error) {
       console.log("Login credentials not correct, login failed", error);
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -43,6 +48,7 @@ function LoginPage() {
               type="email"
               name="email"
               placeholder="Email"
+              required="true"
             />
             <input
               className="bg-transparent border border-white px-[1.5vw] py-[.65vw]
@@ -50,6 +56,7 @@ function LoginPage() {
               type="password"
               name="password"
               placeholder="Password"
+              required="true"
             />
             <div className="flex flex-col justify-center items-center gap-[1vw]">
               <h4 className="uppercase text-[.9vw] tracking-[1.5px]">
@@ -59,7 +66,15 @@ function LoginPage() {
                 type="submit"
                 className="bg-white text-black px-[1.2vw] py-[.5vw] rounded-md"
               >
-                Sign in
+                {isLoading ? (
+                  <ClockLoader
+                    color="#000"
+                    loading={isLoading}
+                    size={30}
+                  />
+                ) : (
+                  "Sign in"
+                )}
               </button>
               <a href="/signup">
                 <h4 className="uppercase text-[1vw] tracking-[1.5px]">
