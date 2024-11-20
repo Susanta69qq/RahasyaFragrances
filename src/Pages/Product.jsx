@@ -4,15 +4,16 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 function Product() {
-  const { id } = useParams();
+  const { name } = useParams();
   const [product, setProduct] = useState({});
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         const fetch = await axios.get(
-          `https://rahasyafragrances.onrender.com/collections/${id}`
+          `https://rahasyafragrances.onrender.com/collections/${name}`
         );
         setProduct(fetch.data.product);
+        console.log(fetch.data.product);
       } catch (error) {
         console.log("Error fetching the desired product: ", error);
       }

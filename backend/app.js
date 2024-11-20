@@ -24,7 +24,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.get("/collections", productRouter);
-app.get("/collections/:id", productRouter);
+app.get("/collections/:name", productRouter);
 app.post("/signup", userRouter);
 app.post("/login", userRouter);
 
