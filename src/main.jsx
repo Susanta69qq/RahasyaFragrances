@@ -8,6 +8,7 @@ import LoginPage from "./Pages/LoginPage.jsx";
 import SmoothScroll from "./components/SmoothScroller";
 import RegisterPage from "./Pages/RegisterPage.jsx";
 import Products from "./Pages/Products.jsx";
+import Product from "./Pages/Product.jsx";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "/collections",
     element: <Products />
+  },
+  {
+    path: "/products/:name",
+    element: <Product />
   }
 ]);
 
