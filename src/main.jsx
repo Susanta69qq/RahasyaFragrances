@@ -21,21 +21,22 @@ const router = createBrowserRouter([
   },
   {
     path: "/signup",
-    element: <RegisterPage />
+    element: <RegisterPage />,
   },
   {
     path: "/collections",
-    element: <Products />
+    element: <Products />,
   },
   {
     path: "/products/:name",
-    element: <Product />
-  }
+    element: <Product />,
+  },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <SmoothScroll />
-    <RouterProvider router={router} />
+    <SmoothScroll>
+      <RouterProvider router={router} />
+    </SmoothScroll>
   </StrictMode>
 );
