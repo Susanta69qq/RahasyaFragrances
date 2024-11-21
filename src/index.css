@@ -59,3 +59,18 @@ html {
 .movingText2 {
   animation: marquee 5s linear infinite;
 }
+
+body.overlay {
+  overflow: hidden;
+}
+
+body.overlay::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
+  z-index: 98; /* Behind the navbar */
+}
