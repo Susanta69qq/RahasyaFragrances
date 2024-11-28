@@ -9,6 +9,9 @@ import SmoothScroll from "./components/SmoothScroller";
 import RegisterPage from "./Pages/RegisterPage.jsx";
 import Products from "./Pages/Products.jsx";
 import Product from "./Pages/Product.jsx";
+import { Provider } from "react-redux";
+import  store  from "./redux/store.js";
+import Checkout from "./Pages/Checkout.jsx";
 
 const router = createBrowserRouter([
   {
@@ -31,12 +34,18 @@ const router = createBrowserRouter([
     path: "/products/:name",
     element: <Product />,
   },
+  {
+    path: "/checkout",
+    element: <Checkout />
+  }
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <SmoothScroll>
-      <RouterProvider router={router} />
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
     </SmoothScroll>
   </StrictMode>
 );

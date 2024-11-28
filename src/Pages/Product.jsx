@@ -8,10 +8,13 @@ import { useLenis } from "lenis/react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/cartSlice";
 
 function Product() {
   const lenis = useLenis();
   const { name } = useParams();
+  const dispatch = useDispatch();
   const [product, setProduct] = useState({});
   const [activeSection, setActiveSection] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -63,6 +66,11 @@ function Product() {
     "HOW TO WEAR": product.howToWear,
     INGREDIENTS: product.ingredients,
     SUSTAINABILITY: product.sustainability,
+  };
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(product));
+    alert(`${product.name} added to cart!`);
   };
 
   return (
@@ -141,6 +149,7 @@ function Product() {
               <button
                 className="mt-[2.5vw] uppercase font-[font2] text-[.9vw] tracking-[1.5px] w-full border 
           border-black py-[.5vw] cursor-pointer"
+                onClick={handleAddToCart}
               >
                 add to cart
               </button>
