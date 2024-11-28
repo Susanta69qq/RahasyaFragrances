@@ -229,8 +229,11 @@ function Navbar({ textColor = "text-white" }) {
                   <p className="font-[font3] text-[.95vw] mt-[.5vw]">
                     Taxes, discounts and shipping calculated at checkout.
                   </p>
-                  <button onClick={() => navigate("/checkout")} className="w-full bg-black text-white uppercase text-[1vw] font-[font1] 
-                  tracking-[1.5px] py-[.5vw] mt-[1.5vw]">
+                  <button
+                    onClick={() => navigate("/checkout")}
+                    className="w-full bg-black text-white uppercase text-[1vw] font-[font1] 
+                  tracking-[1.5px] py-[.5vw] mt-[1.5vw]"
+                  >
                     check out
                   </button>
                 </div>
