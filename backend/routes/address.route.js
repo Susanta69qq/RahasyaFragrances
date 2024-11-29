@@ -3,7 +3,7 @@ import Address from "../models/address.model.js";
 
 const addressRouter = express.Router();
 
-addressRouter.post("/address+add", async (req, res) => {
+addressRouter.post("/add", async (req, res) => {
   const { firstName, lastName, address, city, country, postalCode, phone } =
     req.body;
   try {

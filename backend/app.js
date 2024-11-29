@@ -28,7 +28,7 @@ app.get("/collections", productRouter);
 app.get("/collections/:name", productRouter);
 app.post("/signup", userRouter);
 app.post("/login", userRouter);
-app.post("/address+add", addressRouter);
+app.post("/address/add", addressRouter);
 
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Hello from backend" });
