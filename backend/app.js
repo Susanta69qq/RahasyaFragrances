@@ -7,6 +7,7 @@ import { admin, adminRouter } from "./admin/admin.js";
 import userRouter from "./routes/user.route.js";
 import productRouter from "./routes/product.route.js";
 import addressRouter from "./routes/address.route.js";
+import orderRouter from "./routes/order.route.js";
 
 configDotenv();
 
@@ -28,6 +29,8 @@ app.post("/signup", userRouter);
 app.post("/login", userRouter);
 
 app.use("/address", addressRouter);
+
+app.use("/orders", orderRouter);
 
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Hello from backend" });
