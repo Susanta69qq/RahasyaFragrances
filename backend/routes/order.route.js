@@ -2,6 +2,7 @@ import express from "express";
 import Order from "../models/order.model.js";
 import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
+import Address from "../models/address.model.js";
 
 const orderRouter = express.Router();
 
@@ -28,10 +29,19 @@ orderRouter.post("/order", async (req, res) => {
         .json({ message: "Not authorized to place an order" });
     }
 
+    //Find address of the user
+    const userAddress = await Address.findOne({ user: userId });
+    if (!userAddress) {
+      return res.status(400).json({
+        message:
+          "Please add an address to your account before you can place an order.",
+      });
+    }
+
     const newOrder = await Order.create({
       user: userId,
       products,
-      address,
+      address: userAddress._id,
       total,
       paymentMethod,
     });
