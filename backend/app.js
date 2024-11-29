@@ -7,6 +7,7 @@ import { admin, adminRouter } from "./admin/admin.js";
 import bodyParser from "body-parser";
 import userRouter from "./routes/user.route.js";
 import productRouter from "./routes/product.route.js";
+import addressRouter from "./routes/address.route.js";
 
 configDotenv();
 
@@ -27,6 +28,7 @@ app.get("/collections", productRouter);
 app.get("/collections/:name", productRouter);
 app.post("/signup", userRouter);
 app.post("/login", userRouter);
+app.post("/address+add", addressRouter);
 
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Hello from backend" });

@@ -87,7 +87,7 @@ function Navbar({ textColor = "text-white" }) {
         <a href="">search</a>
         <a href="/login">log in</a>
         <a className="cursor-pointer" onClick={() => setOpenCart(true)}>
-          cart
+          cart ({cartItems.length})
         </a>
 
         {openDialog && (
