@@ -22,8 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors());
 
-app.use(bodyParser.json());
-
+//Routes
 app.get("/collections", productRouter);
 app.get("/collections/:name", productRouter);
 app.post("/signup", userRouter);
