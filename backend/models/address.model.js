@@ -37,10 +37,6 @@ const addressSchema = new mongoose.Schema({
       message: (props) => `${props.value} is not a valid phone number!`,
     },
   },
-  isLoggedIn: {
-    type: Boolean,
-    default: false,
-  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
