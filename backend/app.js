@@ -4,7 +4,6 @@ import { configDotenv } from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import { admin, adminRouter } from "./admin/admin.js";
-import bodyParser from "body-parser";
 import userRouter from "./routes/user.route.js";
 import productRouter from "./routes/product.route.js";
 import addressRouter from "./routes/address.route.js";
