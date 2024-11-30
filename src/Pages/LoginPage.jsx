@@ -20,9 +20,6 @@ function LoginPage() {
         {
           email,
           password,
-        },
-        {
-          withCredentials: true,
         }
       );
 
