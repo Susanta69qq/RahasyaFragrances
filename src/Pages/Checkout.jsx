@@ -9,7 +9,7 @@ const Checkout = () => {
   const cartTotal = useSelector(selectCartTotal);
   const [paymentMethod, setPaymentMethod] = useState("cod");
   const [email, setEmail] = useState("");
-  const [country, setCountry] = useState("India")
+  const [country, setCountry] = useState("India");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [address, setAddress] = useState("");
@@ -49,9 +49,7 @@ const Checkout = () => {
         "https://rahasyafragrances.onrender.com/address/add",
         addressData,
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          withCredentials: true,
         }
       );
 
