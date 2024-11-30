@@ -69,4 +69,31 @@ addressRouter.post("/add", async (req, res) => {
   }
 });
 
+addressRouter.get("/user/address", async (req, res) => {
+  try {
+    const token = req.headers.authorization?.split(" ")[1];
+
+    if (!token) {
+      return res.status(401).json({ message: "Authorization token not found" });
+    }
+
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    const userId = decodedToken.userId;
+
+    const userAddress = await Address.findOne({ user: userId });
+
+    if (!userAddress) {
+      return res.status(400).json({ message: "Address not found" });
+    }
+
+    return res
+      .status(200)
+      .json({ message: "Address fetched successfully", userAddress });
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ message: "Failed to get address", error: error.message });
+  }
+});
+
 export default addressRouter;
