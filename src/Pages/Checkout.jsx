@@ -1,19 +1,115 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectCartTotal } from "../redux/cartSlice";
+import axios from "axios";
 
 const Checkout = () => {
   const cartItems = useSelector((state) => state.cart);
   const cartTotal = useSelector(selectCartTotal);
+  const [paymentMethod, setPaymentMethod] = useState("cod");
+  const [email, setEmail] = useState("");
+  const [country, setCountry] = useState("India")
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("West Bengal");
+  const [postalCode, setPostalCode] = useState("");
+  const [phone, setPhone] = useState("");
+  const [isAddressSaved, setIsAddressSaved] = useState(false);
 
-  const [paymentMethod, setPaymentMethod] = useState("creditCard");
+  const token = localStorage.getItem("authToken");
 
   const handlePaymentChange = (event) => {
     setPaymentMethod(event.target.value);
   };
 
+  const handleAddressSave = async (e) => {
+    e.preventDefault();
+
+    if (!token) {
+      alert("You need to be logged in to be able to save your address");
+      return;
+    }
+
+    const addressData = {
+      firstName,
+      lastName,
+      address,
+      city,
+      country,
+      postalCode,
+      phone,
+    };
+
+    try {
+      const response = await axios.post(
+        "https://rahasyafragrances.onrender.com/address/add",
+        addressData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        alert("Address saved successfully");
+        setIsAddressSaved(true);
+      }
+    } catch (error) {
+      console.error("Error saving address: ", error.response || error);
+      alert("Failed to save the address.");
+    }
+  };
+
+  const handleOrderSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!token) {
+      alert("You need to be logged in to be able to place an order");
+      return;
+    }
+
+    //collect the orderData
+    const orderData = {
+      products: cartItems.map((item) => ({
+        product: item._id,
+        quantity: item.quantity,
+      })),
+      total: cartTotal,
+      paymentMethod,
+    };
+
+    if (!isAddressSaved) {
+      alert("Please save your address before placing the order.");
+      return;
+    }
+
+    //The api request to place the order
+    try {
+      const response = await axios.post(
+        "https://rahasyafragrances.onrender.com/orders/order",
+        orderData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        alert("Your order has been placed successfully!");
+      }
+    } catch (error) {
+      console.error("Error placing the order: ", error.response || error);
+      alert("Failed to place your order");
+    }
+  };
+
   return (
     <div>
+      {/*Navigation*/}
       <nav className="w-full text-center py-[1.5vh] border-b border-gray-200">
         <a href={"/"}>
           <h1 className="text-[2.4vw] font-[font2] uppercase tracking-[1.5px]">
@@ -21,8 +117,10 @@ const Checkout = () => {
           </h1>
         </a>
       </nav>
+      {/*Checkout Form*/}
       <div className="flex">
         <div className="checkoutOptions w-1/2 px-[3vw] py-[1.5vh]">
+          {/*Contact Section*/}
           <div className="contact">
             <div className=" w-full flex items-center justify-between">
               <h2 className="font-[font2] text-[1.65vw]">Contact</h2>
@@ -33,18 +131,23 @@ const Checkout = () => {
             <input
               className="w-full border border-gray-200 mt-[1.5vh] rounded-[.5vw] px-[1vw] py-[2vh] 
             placeholder:text-[.95vw] placeholder:font-[font3] placeholder:text-gray-500 text-[1.1vw] font-[font3]"
-              type="text"
+              type="email"
+              // value={email}
+              // onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
               required
             />
           </div>
+
+          {/*Delivery Section*/}
           <div className="delivery flex flex-col gap-[1vw] mt-[2vh]">
             <h2 className="font-[font2] text-[1.65vw]">Delivery</h2>
             <select
               className="w-full border border-gray-200 px-[1vw] py-[1.5vh] rounded-[.5vw] font-[font3] text-[1.1vw]"
               name="country/region"
               id="country/region"
-              defaultValue="India"
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
             >
               <option className="font-[font3] text-[1vw]" value="Australia">
                 Australia
@@ -69,17 +172,23 @@ const Checkout = () => {
               </option>
             </select>
           </div>
+
+          {/*Address Details Section*/}
           <div className="details">
             <div className="w-full flex gap-[2vw]">
               <input
                 className="w-[48%] border border-gray-200 mt-[1.5vh] rounded-[.5vw] px-[1vw] py-[2vh]"
                 type="text"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
                 placeholder="First Name"
                 required
               />
               <input
                 className="w-[48%] border border-gray-200 mt-[1.5vh] rounded-[.5vw] px-[1vw] py-[2vh]"
                 type="text"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
                 placeholder="Last Name"
                 required
               />
@@ -88,6 +197,8 @@ const Checkout = () => {
               <input
                 className="w-full border border-gray-200 mt-[1.5vh] rounded-[.5vw] px-[1vw] py-[2vh]"
                 type="text"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
                 placeholder="Address"
                 required
               />
@@ -96,11 +207,15 @@ const Checkout = () => {
               <input
                 className="w-[31%] border border-gray-200 mt-[1.5vh] rounded-[.5vw] px-[1vw] py-[2vh]"
                 type="text"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
                 placeholder="City"
                 required
               />
               <select
                 defaultValue="West Bengal"
+                value={state}
+                onChange={(e) => setState(e.target.value)}
                 className="w-[31%] border border-gray-200 mt-[1.5vh] rounded-[.5vw] px-[1vw] py-[2vh]"
               >
                 <option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -135,6 +250,8 @@ const Checkout = () => {
               <input
                 className="w-[31%] border border-gray-200 mt-[1.5vh] rounded-[.5vw] px-[1vw] py-[2vh]"
                 type="text"
+                value={postalCode}
+                onChange={(e) => setPostalCode(e.target.value)}
                 placeholder="PIN code"
                 required
               />
@@ -143,11 +260,22 @@ const Checkout = () => {
               <input
                 className="w-full border border-gray-200 mt-[1.5vh] rounded-[.5vw] px-[1vw] py-[2vh]"
                 type="number"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
                 placeholder="Phone"
                 required
               />
             </div>
+            <button
+              type="submit"
+              onClick={handleAddressSave}
+              className="w-full bg-black text-white py-[1.5vh] font-[font1] mt-[4vh]"
+            >
+              Save Address
+            </button>
           </div>
+
+          {/* Payment Method */}
           <div className="payment mt-[2vh]">
             <h2 className="text-[1.65vw] font-[font2]">Payment</h2>
             <p className="text-[1vw] text-gray-500">
@@ -216,14 +344,18 @@ const Checkout = () => {
             <input
               type="radio"
               name="paymentMethod"
-              value={"payOnDelivery"}
-              checked={paymentMethod === "payOnDelivery"}
+              value={"cod"}
+              checked={paymentMethod === "cod"}
               onChange={handlePaymentChange}
             />
             <h4 className="text-[1.1vw] font-[font2]">Pay on Delivery</h4>
           </div>
-          <button className="w-full bg-black text-white py-[1.5vh] font-[font1] mt-[4vh]">
-            {paymentMethod === "payOnDelivery" ? "Order Now" : "Pay Now"}
+          <button
+            type="submit"
+            onClick={handleOrderSubmit}
+            className="w-full bg-black text-white py-[1.5vh] font-[font1] mt-[4vh]"
+          >
+            {paymentMethod === "cod" ? "Order Now" : "Pay Now"}
           </button>
           <p className="text-[.9vw] mt-[2vh]">
             Your info will be saved to a Shop account. By continuing, you agree

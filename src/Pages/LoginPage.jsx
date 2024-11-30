@@ -4,6 +4,7 @@ import Footer from "../components/Footer.jsx";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ClockLoader } from "react-spinners";
+import Cookies from "js-cookie";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -19,10 +20,13 @@ function LoginPage() {
         {
           email,
           password,
+        },
+        {
+          withCredentials: true,
         }
       );
 
-      localStorage.setItem("authToken", response.data.token);
+      Cookies.set("authToken", response.data.token, { expires: 7 });
       navigate("/");
     } catch (error) {
       console.log("Login credentials not correct, login failed", error);
@@ -67,11 +71,7 @@ function LoginPage() {
                 className="bg-white text-black px-[1.2vw] py-[.5vw] rounded-md"
               >
                 {isLoading ? (
-                  <ClockLoader
-                    color="#000"
-                    loading={isLoading}
-                    size={30}
-                  />
+                  <ClockLoader color="#000" loading={isLoading} size={30} />
                 ) : (
                   "Sign in"
                 )}
