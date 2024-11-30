@@ -20,7 +20,6 @@ const Checkout = () => {
   const [isAddressSaved, setIsAddressSaved] = useState(false);
 
   const token = Cookies.get("authToken");
-  console.log(token);
 
   const handlePaymentChange = (event) => {
     setPaymentMethod(event.target.value);
@@ -49,7 +48,9 @@ const Checkout = () => {
         "https://rahasyafragrances.onrender.com/address/add",
         addressData,
         {
-          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
 

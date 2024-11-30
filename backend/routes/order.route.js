@@ -10,7 +10,8 @@ orderRouter.post("/order", async (req, res) => {
   const { products, address, total, paymentMethod } = req.body;
   try {
     //check if authToken exists in cookies
-    const token = req.cookies.authToken;
+    const token = req.headers.authorization?.split(" ")[1];
+
     if (!token) {
       return res.status(401).json({
         message: "You need to be logged in to be able to place an order",

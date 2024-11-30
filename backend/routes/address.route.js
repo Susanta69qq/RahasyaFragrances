@@ -12,7 +12,13 @@ addressRouter.post("/add", async (req, res) => {
 
   try {
     //check if authToken exists in cookies
-    const token = req.cookies.authToken;
+    const token = req.headers.authorization?.split(" ")[1];
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ message: "You need to be logged in to add an address" });
+    }
 
     //Decode token to get userId
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
