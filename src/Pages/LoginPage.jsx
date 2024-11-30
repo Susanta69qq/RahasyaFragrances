@@ -9,11 +9,16 @@ import Cookies from "js-cookie";
 function LoginPage() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(""); // New state for error message
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    setError(""); // Reset error message on new login attempt
+
     const email = e.target.email.value;
     const password = e.target.password.value;
+
     try {
       const response = await axios.post(
         "https://rahasyafragrances.onrender.com/login",
@@ -26,11 +31,18 @@ function LoginPage() {
       Cookies.set("authToken", response.data.token, { expires: 7 });
       navigate("/");
     } catch (error) {
+      // Check if the error is due to invalid credentials and display a message
+      if (error.response && error.response.status === 401) {
+        setError("Incorrect email or password. Please try again.");
+      } else {
+        setError("Incorrect email or password. Please try again.");
+      }
       console.log("Login credentials not correct, login failed", error);
     } finally {
       setIsLoading(false);
     }
   };
+
   return (
     <div className="h-screen bg-black">
       <Navbar />
@@ -49,7 +61,7 @@ function LoginPage() {
               type="email"
               name="email"
               placeholder="Email"
-              required="true"
+              required
             />
             <input
               className="bg-transparent border border-white px-[1.5vw] py-[.65vw]
@@ -57,8 +69,14 @@ function LoginPage() {
               type="password"
               name="password"
               placeholder="Password"
-              required="true"
+              required
             />
+            {/* Display error message if there's one */}
+            {error && (
+              <div className="text-red-500 text-[1vw] mt-[1vw]">
+                {error}
+              </div>
+            )}
             <div className="flex flex-col justify-center items-center gap-[1vw]">
               <h4 className="uppercase text-[.9vw] tracking-[1.5px]">
                 forgot your password?

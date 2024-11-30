@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { selectCartTotal } from "../redux/cartSlice";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+import { ClockLoader } from "react-spinners";
 
 const Checkout = () => {
   const cartItems = useSelector((state) => state.cart);
@@ -18,8 +20,10 @@ const Checkout = () => {
   const [postalCode, setPostalCode] = useState("");
   const [phone, setPhone] = useState("");
   const [isAddressSaved, setIsAddressSaved] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const token = Cookies.get("authToken");
+  const navigate = useNavigate();
 
   const handlePaymentChange = (event) => {
     setPaymentMethod(event.target.value);
@@ -27,7 +31,7 @@ const Checkout = () => {
 
   const handleAddressSave = async (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
     if (!token) {
       alert("You need to be logged in to be able to save your address");
       return;
@@ -60,12 +64,15 @@ const Checkout = () => {
       }
     } catch (error) {
       console.error("Error saving address: ", error.response || error);
-      alert("Failed to save the address.");
+      alert("User Details already exists, choose different credentials");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleOrderSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     if (!token) {
       alert("You need to be logged in to be able to place an order");
@@ -101,10 +108,14 @@ const Checkout = () => {
 
       if (response.status === 200) {
         alert("Your order has been placed successfully!");
+        localStorage.removeItem("cart");
+        navigate("/");
       }
     } catch (error) {
       console.error("Error placing the order: ", error.response || error);
       alert("Failed to place your order");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -272,7 +283,11 @@ const Checkout = () => {
               onClick={handleAddressSave}
               className="w-full bg-black text-white py-[1.5vh] font-[font1] mt-[4vh]"
             >
-              Save Address
+              {isLoading ? (
+                <ClockLoader color="#fff" loading={isLoading} size={30} />
+              ) : (
+                "Save Address"
+              )}
             </button>
           </div>
 
@@ -356,7 +371,11 @@ const Checkout = () => {
             onClick={handleOrderSubmit}
             className="w-full bg-black text-white py-[1.5vh] font-[font1] mt-[4vh]"
           >
-            {paymentMethod === "cod" ? "Order Now" : "Pay Now"}
+            {isLoading ? (
+              <ClockLoader color="#fff" loading={isLoading} size={30} />
+            ) : (
+              "Place Order"
+            )}
           </button>
           <p className="text-[.9vw] mt-[2vh]">
             Your info will be saved to a Shop account. By continuing, you agree

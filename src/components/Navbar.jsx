@@ -7,6 +7,7 @@ import {
   selectCartTotal,
 } from "../redux/cartSlice";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 function Navbar({ textColor = "text-white" }) {
   const [openDialog, setOpenDialog] = useState(false);
@@ -26,6 +27,9 @@ function Navbar({ textColor = "text-white" }) {
     setOptions(e.target.innerText);
     setOpenDialog(false);
   };
+
+  //check if the user is logged in
+  const isLoggedIn = Cookies.get("authToken");
 
   //remove items from cart
   const handleRemoveItem = (itemId) => {
@@ -85,7 +89,9 @@ function Navbar({ textColor = "text-white" }) {
           </span>
         </a>
         <a href="">search</a>
-        <a href="/login">log in</a>
+        <a href={isLoggedIn ? "/account" : "/login"}>
+          {isLoggedIn ? "account" : "login"}
+        </a>
         <a className="cursor-pointer" onClick={() => setOpenCart(true)}>
           cart ({cartItems.length})
         </a>

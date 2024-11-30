@@ -10,8 +10,9 @@ import RegisterPage from "./Pages/RegisterPage.jsx";
 import Products from "./Pages/Products.jsx";
 import Product from "./Pages/Product.jsx";
 import { Provider } from "react-redux";
-import  store  from "./redux/store.js";
+import store from "./redux/store.js";
 import Checkout from "./Pages/Checkout.jsx";
+import Account from "./Pages/Account.jsx";
 
 const router = createBrowserRouter([
   {
@@ -36,8 +37,12 @@ const router = createBrowserRouter([
   },
   {
     path: "/checkout",
-    element: <Checkout />
-  }
+    element: <Checkout />,
+  },
+  {
+    path: "/account",
+    element: <Account />,
+  },
 ]);
 
 createRoot(document.getElementById("root")).render(
