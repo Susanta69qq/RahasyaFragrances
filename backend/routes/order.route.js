@@ -75,7 +75,7 @@ orderRouter.get("/user/orders", async (req, res) => {
     const user = await User.findById(userId);
 
     //Find orders of the user
-    const orders = await Order.find({ user: user._id });
+    const orders = await Order.find({ user: user._id }).populate('products.product');
 
     return res
       .status(200)

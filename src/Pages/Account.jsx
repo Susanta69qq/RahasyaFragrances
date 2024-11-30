@@ -1,15 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Account() {
   const navigate = useNavigate();
+  const [orders, setOrders] = useState([]);
   const handleLogout = () => {
     Cookies.remove("authToken");
     navigate("/");
   };
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      const token = Cookies.get("authToken");
+      console.log(token);
+      try {
+        const response = await axios.get(
+          "https://rahasyafragrances.onrender.com/orders/user/orders",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setOrders(response.data.orders);
+      } catch (error) {
+        console.log("Error fetching orders: ", error);
+      }
+    };
+
+    fetchOrders();
+  }, []);
 
   return (
     <div className="h-screen bg-black">
@@ -33,9 +57,38 @@ function Account() {
               Order history
             </h1>
             <div className="mt-2">
-              <p className="text-gray-200 font-[font3] text-[1.2vw]">
-                You haven't made any orders yet.
-              </p>
+              {orders.length > 0 ? (
+                orders.map((order, orderIndex) => (
+                  <div
+                    key={order._id}
+                    className="order-item text-gray-200 font-[font3] text-[1.2vw] mb-4"
+                  >
+                    <h3>Order #{order._id}</h3>
+                    <p>Total: ${order.total / 100}</p>
+                    <p>Status: {order.status}</p>
+                    <p>Payment Method: {order.paymentMethod.toUpperCase()}</p>
+                    <p>Date: {new Date(order.date).toLocaleString()}</p>
+
+                    <div className="products">
+                      <h4>Products:</h4>
+                      <ul className="ml-4">
+                        {order.products.map((product, productIndex) => (
+                          <li key={product._id} className="product-item">
+                            <p>
+                              Product ID: {product.product} | Quantity:{" "}
+                              {product.quantity}
+                            </p>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p className="text-gray-200 font-[font3] text-[1.2vw]">
+                  You haven't made any orders yet.
+                </p>
+              )}
             </div>
           </div>
         </div>
