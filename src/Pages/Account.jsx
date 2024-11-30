@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -9,6 +8,7 @@ import { ClipLoader } from "react-spinners";
 function Account() {
   const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
+  const [userDetails, setUserDetails] = useState({});
   const [loading, setLoading] = useState(false);
   const handleLogout = () => {
     Cookies.remove("authToken");
@@ -16,12 +16,20 @@ function Account() {
   };
 
   useEffect(() => {
-    const fetchOrders = async () => {
+    const fetchUserAndOrderDetails = async () => {
       const token = Cookies.get("authToken");
       setLoading(true);
       try {
         //fetch address of the user
-        
+        const addressResponse = await axios.get(
+          "https://rahasyafragrances.onrender.com/address/user/address",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setUserDetails(addressResponse.data.userAddress);
         //fetch orders
         const OrderResponse = await axios.get(
           "https://rahasyafragrances.onrender.com/orders/user/orders",
@@ -39,7 +47,7 @@ function Account() {
       }
     };
 
-    fetchOrders();
+    fetchUserAndOrderDetails();
   }, []);
 
   return (
@@ -133,15 +141,16 @@ function Account() {
                 Account details
               </h1>
               <div>
-                <h5 className="text-gray-200 font-[font3] text-[1.2vw]">
-                  Name
+                <h5 className="text-gray-200 font-[font1] text-[1.5vw] capitalize">
+                  {userDetails.firstName} {userDetails.lastName}
                 </h5>
                 <h5 className="text-gray-200 font-[font3] text-[1.2vw]">
-                  Country
+                  {userDetails.country}
                 </h5>
               </div>
               <h5 className="text-gray-200 font-[font3] text-[1.2vw]">
-                Address
+                {userDetails.address}, {userDetails.city}{" "}
+                {userDetails.postalCode}
               </h5>
             </div>
           </div>
