@@ -57,4 +57,32 @@ orderRouter.post("/order", async (req, res) => {
   }
 });
 
+orderRouter.get("/user/orders", async (req, res) => {
+  try {
+    const loggedInUser = req.headers.authorization?.split(" ")[1];
+
+    if (!loggedInUser) {
+      return res
+        .status(401)
+        .json({ message: "Can't get the authorization token" });
+    }
+
+    //Decode token to get userId
+    const decodedToken = jwt.verify(loggedInUser, process.env.JWT_SECRET);
+    const userId = decodedToken.userId;
+
+    //Find user associated with the token
+    const user = await User.findById(userId);
+
+    //Find orders of the user
+    const orders = await Order.find({ user: user._id });
+
+    return res
+      .status(200)
+      .json({ message: "Orders fetched successfully", orders });
+  } catch (error) {
+    return res.status(400).json({ message: "Failed to fetch orders", error });
+  }
+});
+
 export default orderRouter;
