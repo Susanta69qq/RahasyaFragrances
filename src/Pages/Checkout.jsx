@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectCartTotal } from "../redux/cartSlice";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const Checkout = () => {
   const cartItems = useSelector((state) => state.cart);
@@ -18,7 +19,8 @@ const Checkout = () => {
   const [phone, setPhone] = useState("");
   const [isAddressSaved, setIsAddressSaved] = useState(false);
 
-  const token = localStorage.getItem("authToken");
+  const token = Cookies.get("authToken");
+  console.log(token);
 
   const handlePaymentChange = (event) => {
     setPaymentMethod(event.target.value);
