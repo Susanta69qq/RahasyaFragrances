@@ -42,6 +42,10 @@ app.get("/", (req, res) => {
   res.status(200).json({ message: "Hello from backend" });
 });
 
+app.get("/health", (req, res) => {
+  res.status(200).send("Ok");
+});
+
 app.listen(process.env.PORT, () => {
   console.log(`listening to port ${process.env.PORT}`);
 });
