@@ -1,7 +1,6 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import React from "react";
 import SplitType from "split-type";
 
 function Page2() {
@@ -22,18 +21,19 @@ function Page2() {
       delay: 0.5,
     });
   }, []);
+
   return (
     <div className="h-screen bg-black">
-      <div className="h-full text-white font-[font4] flex flex-col gap-[5vw] items-center justify-center ">
-        <h1 className="target text-center text-[3vw] leading-[4vw]">
-          Our mission is to put Indian inspired niche <br /> perfumery on the
-          map through an <br /> uncompromising attitude towards quality and an{" "}
-          <br /> obsession to represent the new India, one that is <br />{" "}
-          modern, youthful, vibrant and bold.{" "}
+      <div className="h-full text-white font-[font4] flex flex-col gap-[5vw] items-center justify-center px-[21vw]">
+        <h1 className="target text-[3vw] max-sm:text-[6vw] leading-[4vw] max-sm:leading-[10vw]">
+          Our mission is to put Indian inspired niche perfumery on the map
+          through an uncompromising attitude towards quality and an obsession to
+          represent the new India, one that is modern, youthful, vibrant and
+          bold.{" "}
         </h1>
 
         <a
-          className="target uppercase font-[font3] text-[.85vw] tracking-[1.5px]"
+          className="target uppercase font-[font3] text-[.85vw] max-sm:text-[2.75vw] tracking-[1.5px] max-sm:mt-[10vw]"
           href=""
         >
           about rahasya{" "}
