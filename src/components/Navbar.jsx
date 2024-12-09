@@ -118,9 +118,17 @@ function Navbar({ textColor = "text-white" }) {
           </div>
         </div>
 
-        <div className="socials px-[3.5vw] flex gap-[2.5vw] pb-[3.5vw]">
-          <i className="ri-instagram-line text-white text-[5vw]"></i>
-          <i className="ri-tiktok-fill text-white text-[5vw]"></i>
+        <div className="flex flex-col gap-[2.5vw]">
+          <a
+            className="uppercase text-white font-[font3] text-[5vw]"
+            href={isLoggedIn ? "/account" : "/login"}
+          >
+            {isLoggedIn ? "account" : "login"}
+          </a>
+          <div className="socials px-[3.5vw] flex gap-[2.5vw] pb-[3.5vw]">
+            <i className="ri-instagram-line text-white text-[5vw]"></i>
+            <i className="ri-tiktok-fill text-white text-[5vw]"></i>
+          </div>
         </div>
       </div>
 
