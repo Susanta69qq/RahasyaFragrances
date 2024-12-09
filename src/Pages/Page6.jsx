@@ -49,8 +49,8 @@ function Page6() {
   }, []);
 
   const mobileView = (
-    <div className="h-[85vh] relative bg-[url(https://rahasyafragrances.com/cdn/shop/files/Love_Marriage_-_Mobile.png?v=1728510338&width=1200)] 
-    bg-contain bg-no-repeat">
+    <div className="h-[100vh] relative bg-[url(https://rahasyafragrances.com/cdn/shop/files/Love_Marriage_-_Mobile.png?v=1728510338&width=1200)] 
+    bg-contain bg-no-repeat mt-[-44vw]">
     <div className="w-full h-full bg-black opacity-20"></div>
     <div
       ref={animatedRef}

@@ -4,10 +4,14 @@ import Footer from "../components/Footer";
 function Page7() {
   return (
     <>
-      <div className="mainScreen h-screen max-sm:h-[50vh] bg-black flex max-sm:flex-col items-center 
-      justify-between max-sm:justify-evenly max-sm:gap-[4vw] px-[4.5vw]">
+      <div
+        className="mainScreen h-screen max-sm:h-[50vh] bg-black flex max-sm:flex-col items-center 
+      justify-between max-sm:justify-evenly max-sm:gap-[4vw] px-[4.5vw] max-sm:mt-[-44vw]"
+      >
         <div className="text-white font-[font3] flex flex-col gap-[2vw]">
-          <h1 className="text-[2.75vw] max-sm:text-[4vw]">JOIN THE COMMUNITY</h1>
+          <h1 className="text-[2.75vw] max-sm:text-[4vw]">
+            JOIN THE COMMUNITY
+          </h1>
           <p className="text-[.9vw] max-sm:text-[2.25vw] max-sm:leading-[4vw]">
             We're here to represent the modern Indian identity through fine
             fragrance. Along the <br /> way, we hope to celebrate new age music,
@@ -18,7 +22,11 @@ function Page7() {
           </p>
         </div>
         <div className="w-[51vw] max-sm:w-full max-sm:px-[4.5vw]">
-          <form className="flex flex-col gap-[1.5vw] max-sm:gap-[3vw]" action="" method="post">
+          <form
+            className="flex flex-col gap-[1.5vw] max-sm:gap-[3vw]"
+            action=""
+            method="post"
+          >
             <div className="flex gap-[1vw] max-sm:gap-[3vw]">
               <input
                 className="bg-transparent border border-white px-[1vw] max-sm:px-[2vw] py-[.75vw] 

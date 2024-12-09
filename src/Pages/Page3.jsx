@@ -49,7 +49,7 @@ function Page3() {
   }, []);
 
   const mobileView = (
-    <div className="h-[80vh] relative bg-[url(https://rahasyafragrances.com/cdn/shop/files/Chapter_One_-_Mobile_a035911b-3730-428e-8ec1-9fa160189548.png?v=1728510328&width=1200)] 
+    <div className="h-[100vh] relative bg-[url(https://rahasyafragrances.com/cdn/shop/files/Chapter_One_-_Mobile_a035911b-3730-428e-8ec1-9fa160189548.png?v=1728510328&width=1200)] 
     bg-cover bg-center">
       <div className="w-full h-full bg-black opacity-20"></div>
       <div
