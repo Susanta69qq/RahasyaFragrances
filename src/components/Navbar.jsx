@@ -8,7 +8,6 @@ import {
 } from "../redux/cartSlice";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import { set } from "react-hook-form";
 
 function Navbar({ textColor = "text-white" }) {
   const [openDialog, setOpenDialog] = useState(false);
@@ -78,7 +77,7 @@ function Navbar({ textColor = "text-white" }) {
     <div className="mobileNav fixed w-full px-[3.75vw] py-[1.5vw] z-[99] flex justify-between items-center">
       <i
         onClick={handleMobileMenu}
-        className="ri-menu-line text-white text-[5vw]"
+        className={`ri-menu-line ${textColor} text-[5vw]`}
       ></i>
       <a href={"/"}>
         <h2 className={`${textColor} uppercase font-[font4] text-[7vw]`}>
@@ -86,10 +85,10 @@ function Navbar({ textColor = "text-white" }) {
         </h2>
       </a>
       <a
-        className="cursor-pointer text-white font-thin flex gap-[1.5vw] items-center"
+        className={`cursor-pointer ${textColor} font-thin flex gap-[1.5vw] items-center`}
         onClick={() => setOpenCart(true)}
       >
-        <i className="ri-shopping-cart-line text-white text-[5vw]"></i> (
+        <i className={`ri-shopping-cart-line ${textColor} text-[5vw]`}></i> (
         {cartItems.length})
       </a>
 
