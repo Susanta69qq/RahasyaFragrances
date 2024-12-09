@@ -6,7 +6,7 @@ function Page7() {
     <>
       <div
         className="mainScreen h-screen max-sm:h-[50vh] bg-black flex max-sm:flex-col items-center 
-      justify-between max-sm:justify-evenly max-sm:gap-[4vw] px-[4.5vw] max-sm:mt-[-44vw]"
+      justify-between max-sm:justify-evenly max-sm:gap-[4vw] px-[4.5vw] max-sm:mt-[-40vw]"
       >
         <div className="text-white font-[font3] flex flex-col gap-[2vw]">
           <h1 className="text-[2.75vw] max-sm:text-[4vw]">

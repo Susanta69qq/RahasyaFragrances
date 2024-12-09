@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 const corsOptions = {
-  origin: "https://rahasyafragrances.netlify.app",
+  origin: ["https://rahasyafragrances.netlify.app", "http://localhost:5173"],
   methods: "GET,POST",
   credentials: true,
 };
