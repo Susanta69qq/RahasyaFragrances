@@ -48,7 +48,7 @@ function Page5() {
   }, []);
 
   const mobileView = (
-    <div className="h-[80vh] relative bg-[url(https://rahasyafragrances.com/cdn/shop/files/Oud_Mangi_-_Mobile.png?v=1728510357&width=1200)] 
+    <div className="h-[85vh] relative bg-[url(https://rahasyafragrances.com/cdn/shop/files/Oud_Mangi_-_Mobile.png?v=1728510357&width=1200)] 
     bg-contain bg-no-repeat">
       <div className="w-full h-full bg-black opacity-20"></div>
       <div
