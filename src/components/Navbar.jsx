@@ -97,7 +97,7 @@ function Navbar({ textColor = "text-white" }) {
         className={`absolute top-0 ${
           openMobileMenu ? "left-0" : "left-[-100%]"
         } w-full h-screen bg-black 
-        px-[3.5vw] py-[.65vw] text-black cursor-pointer transition-all duration-300 flex flex-col justify-between`}
+        px-[3.5vw] py-[.65vw] text-black cursor-pointer transition-all duration-300 flex flex-col justify-between pb-[5.5vw]`}
       >
         <div>
           <div className="w-full flex justify-start">

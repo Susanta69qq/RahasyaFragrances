@@ -9,7 +9,7 @@ function Page7() {
       justify-between max-sm:justify-evenly max-sm:gap-[4vw] px-[4.5vw] max-sm:mt-[-40vw]"
       >
         <div className="text-white font-[font3] flex flex-col gap-[2vw]">
-          <h1 className="text-[2.75vw] max-sm:text-[4vw]">
+          <h1 className="text-[2.75vw] max-sm:text-[4.25vw]">
             JOIN THE COMMUNITY
           </h1>
           <p className="text-[.9vw] max-sm:text-[2.25vw] max-sm:leading-[4vw]">
