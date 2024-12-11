@@ -22,7 +22,7 @@ function LoginPage() {
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [isMobile]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -59,18 +59,18 @@ function LoginPage() {
   const mobileView = (
     <div className="h-screen bg-black">
       <Navbar />
-      <div className="mainContent flex justify-center text-white items-end h-full py-[2vw]">
+      <div className="mainContent pt-[40%] flex justify-center text-white items-end py-[2vw]">
         <div className="flex flex-col items-center">
-          <h1 className="text-[4vw] font-[font4]">Login</h1>
+          <h1 className="text-[8vw] font-[font4]">Login</h1>
           <form
             onSubmit={handleLogin}
-            className="flex flex-col gap-[1.5vw] w-[40vw] mt-[1.5vw]"
+            className="flex flex-col gap-[4vw] w-[70vw] mt-[3vw]"
             action=""
             method="post"
           >
             <input
               className="bg-transparent border border-white px-[1.5vw] py-[.65vw] 
-                placeholder:text-[.9vw] placeholder:font-[font3]"
+                placeholder:text-[2.5vw] placeholder:font-[font3] text-[4vw]"
               type="email"
               name="email"
               placeholder="Email"
@@ -78,7 +78,7 @@ function LoginPage() {
             />
             <input
               className="bg-transparent border border-white px-[1.5vw] py-[.65vw]
-                placeholder:text-[.9vw] placeholder:font-[font3]"
+                placeholder:text-[2.5vw] placeholder:font-[font3] text-[4vw]"
               type="password"
               name="password"
               placeholder="Password"
@@ -86,15 +86,15 @@ function LoginPage() {
             />
             {/* Display error message if there's one */}
             {error && (
-              <div className="text-red-500 text-[1vw] mt-[1vw]">{error}</div>
+              <div className="text-red-500 text-[4vw] mt-[2vw]">{error}</div>
             )}
-            <div className="flex flex-col justify-center items-center gap-[1vw]">
-              <h4 className="uppercase text-[.9vw] tracking-[1.5px]">
+            <div className="flex flex-col justify-center items-center gap-[3vw]">
+              <h4 className="uppercase text-[2.5vw] tracking-[1.5px]">
                 forgot your password?
               </h4>
               <button
                 type="submit"
-                className="bg-white text-black px-[1.2vw] py-[.5vw] rounded-md"
+                className="bg-white text-black px-[2.5vw] py-[1vw] rounded-md"
               >
                 {isLoading ? (
                   <ClockLoader color="#000" loading={isLoading} size={30} />
@@ -103,7 +103,7 @@ function LoginPage() {
                 )}
               </button>
               <a href="/signup">
-                <h4 className="uppercase text-[1vw] tracking-[1.5px]">
+                <h4 className="uppercase text-[3vw] tracking-[1.5px]">
                   create account
                 </h4>
               </a>

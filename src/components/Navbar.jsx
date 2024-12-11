@@ -165,27 +165,27 @@ function Navbar({ textColor = "text-white" }) {
             </div>
           ) : (
             <div className="w-full">
-              <h1 className="text-[2vw] font-[font4]">Your cart</h1>
-              <div className="w-full flex justify-between mt-[1.5vw] font-[font2] text-[.95vw] tracking-[1.5px]">
+              <h1 className="text-[6vw] font-[font4]">Your cart</h1>
+              <div className="w-full flex justify-between mt-[1.5vw] font-[font2] text-[2.5vw] tracking-[1.5px]">
                 <h3>PRODUCT</h3>
                 <h3>TOTAL</h3>
               </div>
               <div className="w-full h-[.5px] bg-gray-400 mt-[1.5vw]"></div>
-              <div className="cartItems flex flex-col gap-[1.5vw]">
+              <div className="cartItems flex flex-col gap-[3.5vw]">
                 {cartItems.map((item) => (
                   <div
                     key={item._id}
                     className="flex justify-between items-center"
                   >
                     {item.images && (
-                      <img className="w-[7.5vw]" src={item.images[0]} alt="" />
+                      <img className="w-[20vw]" src={item.images[0]} alt="" />
                     )}
-                    <div className="flex flex-col gap-[.5vw]">
-                      <h5 className="font-[font3] text-[.95vw]">{item.name}</h5>
-                      <p className="font-[font3] text-[.95vw]">
+                    <div className="flex flex-col gap-[1.5vw]">
+                      <h5 className="font-[font3] text-[2.5vw]">{item.name}</h5>
+                      <p className="font-[font3] text-[2.5vw]">
                         Rs. {item.price}.00
                       </p>
-                      <div className="flex gap-[2.5vw] border border-gray-400 p-[.5vw] w-[fit-content]">
+                      <div className="flex gap-[4vw] border border-gray-400 p-[1vw] w-[fit-content]">
                         <i
                           onClick={() =>
                             dispatch(decreaseQuantity({ _id: item._id }))
@@ -200,34 +200,34 @@ function Navbar({ textColor = "text-white" }) {
                       </div>
                     </div>
                     <div className="flex flex-col gap-[.5vw]">
-                      <p className="font-[font3] text-[1.1vw]">
+                      <p className="font-[font3] text-[2.5vw]">
                         Rs. {item.total}.00
                       </p>
                       <i
                         onClick={() =>
                           dispatch(removeFromCart({ _id: item._id }))
                         }
-                        className="ri-delete-bin-2-line text-[1.5vw]"
+                        className="ri-delete-bin-2-line text-[3vw]"
                       ></i>
                     </div>
                   </div>
                 ))}
                 <div className="border-t-[1px] border-gray-400 py-[.5vw] mb-[1.5vw]">
                   <div className="flex justify-between items-center">
-                    <h2 className="font-[font3] text-[1.1vw]">
+                    <h2 className="font-[font3] text-[2.75vw]">
                       Estimated Total
                     </h2>
-                    <p className="font-[font3] text-[1.1vw]">
+                    <p className="font-[font3] text-[2.5vw]">
                       Rs. {cartTotal}.00
                     </p>
                   </div>
-                  <p className="font-[font3] text-[.95vw] mt-[.5vw]">
+                  <p className="font-[font3] text-[2.25vw] mt-[.5vw]">
                     Taxes, discounts and shipping calculated at checkout.
                   </p>
                   <button
                     onClick={() => navigate("/checkout")}
-                    className="w-full bg-black text-white uppercase text-[1vw] font-[font1] 
-                    tracking-[1.5px] py-[.5vw] mt-[1.5vw]"
+                    className="w-full bg-black text-white uppercase text-[3vw] font-[font1] 
+                    tracking-[1.5px] py-[1vw] mt-[3vw]"
                   >
                     check out
                   </button>
